@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Algo AI Platform</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">AI</span>
+        <div>
+          <strong>Algo AI</strong>
+          <small>Indian strategy ops</small>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-view="builder">Builder</button>
+        <button class="nav-btn" data-view="market">Market Data</button>
+        <button class="nav-btn" data-view="projects">Projects</button>
+        <button class="nav-btn" data-view="references">References</button>
+        <button class="nav-btn" data-view="review">Review</button>
+      </nav>
+      <div class="status">
+        <span id="healthDot"></span>
+        <span id="healthText">Connecting</span>
+      </div>
+    </aside>
+
+    <main>
+      <section class="topbar">
+        <div>
+          <h1>Automated Trading Strategy Platform</h1>
+          <p>Generate, validate, and review Indian market strategy projects with ethereum007/algo.</p>
+        </div>
+        <button id="refreshBtn">Refresh</button>
+      </section>
+
+      <section id="builder" class="view active">
+        <form id="builderForm" class="workspace">
+          <div class="panel primary-panel">
+            <div class="panel-head">
+              <h2>Strategy Brief</h2>
+              <span>Skill-backed scaffold</span>
+            </div>
+            <div class="grid two">
+              <label>Strategy name<input name="name" value="nifty_momentum_guarded" /></label>
+              <label>Display name<input name="displayName" value="Nifty Momentum Guarded" /></label>
+              <label>Symbols<input name="symbols" value="NIFTY,RELIANCE,HDFCBANK,TCS" /></label>
+              <label>Capital<input name="capital" type="number" value="500000" min="10000" /></label>
+            </div>
+            <div class="grid three">
+              <label>Asset class<select name="assetClass"><option>Equity</option><option>F&O</option><option>Currency derivatives</option><option>MCX commodities</option></select></label>
+              <label>Mode<select name="mode"><option>Paper trading</option><option>Backtest</option><option>Live shell</option></select></label>
+              <label>Broker<select name="broker"><option>Rupeezy / Vortex</option><option>Broker adapter placeholder</option></select></label>
+              <label>Exchange<select name="exchange"><option>NSE</option><option>BSE</option><option>MCX</option></select></label>
+              <label>Product<select name="product"><option>INTRADAY</option><option>DELIVERY</option><option>MTF</option></select></label>
+              <label>Schedule<input name="schedule" value="09:20-15:15 IST" /></label>
+            </div>
+            <label>Entry logic<textarea name="entryLogic">Moving average trend confirmation with RSI and volume filters</textarea></label>
+            <label>Exit logic<textarea name="exitLogic">Mandatory stop-loss, target, trailing stop, and 15:15 IST time exit</textarea></label>
+            <label>Position sizing<textarea name="positionSizing">Risk based sizing with max position value, max open positions, and daily loss breaker</textarea></label>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Risk Console</h2>
+              <span>Pre-trade gates</span>
+            </div>
+            <label>Risk per trade <output id="riskPerTradeOut">1%</output><input name="riskPerTrade" type="range" min="0.25" max="3" step="0.25" value="1" /></label>
+            <label>Daily loss limit <output id="dailyLossOut">3%</output><input name="dailyLoss" type="range" min="1" max="8" step="0.5" value="3" /></label>
+            <label>Drawdown pause <output id="maxDrawdownOut">10%</output><input name="maxDrawdown" type="range" min="3" max="20" step="1" value="10" /></label>
+            <label>Max open positions<input name="maxPositions" type="number" value="3" min="1" max="15" /></label>
+            <button type="submit" class="primary">Generate Platform Project</button>
+            <pre id="generateLog" class="log">Ready.</pre>
+          </div>
+        </form>
+      </section>
+
+      <section id="market" class="view">
+        <div class="market-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Real Market Data</h2>
+              <span id="marketProvider">Public delayed feed</span>
+            </div>
+            <div class="market-actions">
+              <label>Symbols<input id="marketSymbols" value="NIFTY,RELIANCE,HDFCBANK,TCS" /></label>
+              <button id="loadMarketBtn">Load Prices</button>
+              <button id="autoMarketBtn">Auto Refresh</button>
+            </div>
+            <div id="marketNotice" class="notice">Uses public delayed quote data for research. Live execution should use broker market data.</div>
+            <div id="quoteGrid" class="quote-grid"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2 id="chartTitle">Intraday Trace</h2>
+              <span id="chartMeta">1 minute</span>
+            </div>
+            <canvas id="marketChart" width="820" height="360"></canvas>
+            <pre id="marketLog" class="log">Load symbols to fetch current prices.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="view">
+        <div class="split">
+          <div class="panel">
+            <div class="panel-head"><h2>Generated Projects</h2><span id="projectCount">0</span></div>
+            <div id="projectList" class="list"></div>
+          </div>
+          <div class="panel file-panel">
+            <div class="panel-head"><h2 id="fileTitle">File Preview</h2><span id="fileMeta"></span></div>
+            <pre id="filePreview" class="code">Select a generated project file.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="references" class="view">
+        <div class="split">
+          <div class="panel">
+            <div class="panel-head"><h2>Skill References</h2><span>ethereum007/algo</span></div>
+            <div id="referenceList" class="list"></div>
+          </div>
+          <div class="panel file-panel">
+            <div class="panel-head"><h2 id="referenceTitle">Reference Preview</h2><span>Markdown</span></div>
+            <pre id="referencePreview" class="code">Select a reference.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="review" class="view">
+        <div class="panel">
+          <div class="panel-head"><h2>Validation Output</h2><span id="reviewStatus">No run yet</span></div>
+          <div class="review-actions">
+            <select id="reviewProject"></select>
+            <button id="validateBtn">Run Validator</button>
+          </div>
+          <pre id="reviewOutput" class="log tall">Generate a project, then run the skill validator.</pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

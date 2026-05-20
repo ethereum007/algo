@@ -42,4 +42,5 @@ iteration-*/
 # Scaffolded strategies (generated, not committed)
 # Uncomment if you scaffold locally:
 # my_strategy/
+platform/generated_strategies/
 .claude/*
