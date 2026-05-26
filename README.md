@@ -16,7 +16,7 @@ Covers the full lifecycle: backtesting → optimization → paper trading → li
 
 ```bash
 # Register the marketplace (one-time)
-claude plugin marketplace add RupeezyTech/algo_ai_skill
+claude plugin marketplace add ethereum007/algo
 
 # Install
 claude plugin install indian-algo-trading@rupeezy
@@ -24,7 +24,7 @@ claude plugin install indian-algo-trading@rupeezy
 
 ### Standalone Skill
 
-Download from [Releases](https://github.com/RupeezyTech/algo_ai_skill/releases) and extract:
+Download from [Releases](https://github.com/ethereum007/algo/releases) and extract:
 
 ```bash
 unzip indian-algo-trading-*.skill -d ~/.claude/skills/indian-algo-trading/
@@ -33,8 +33,8 @@ unzip indian-algo-trading-*.skill -d ~/.claude/skills/indian-algo-trading/
 ### Local dev / testing
 
 ```bash
-git clone https://github.com/RupeezyTech/algo_ai_skill.git
-claude --plugin-dir ./algo_ai_skill
+git clone https://github.com/ethereum007/algo.git
+claude --plugin-dir ./algo
 ```
 
 ---
@@ -97,7 +97,7 @@ Every strategy includes: stop-losses, margin checks, tick size rounding, IST tim
 ## Repository Structure
 
 ```
-algo_ai_skill/
+algo/
 ├── .claude-plugin/
 │   └── marketplace.json              # Marketplace catalog (GitHub sync)
 │
